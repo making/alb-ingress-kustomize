@@ -1,0 +1,42 @@
+- op: replace
+  path: /spec/template/spec/containers/0/image
+  value: amazon/aws-alb-ingress-controller:v1.0.1
+
+- op: replace
+  path: /spec/replicas
+  value: 2
+
+- op: add
+  path: /spec/template/spec/affinity
+  value:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - alb-ingress-controller
+          topologyKey: kubernetes.io/hostname
+
+- op: replace
+  path: /spec/template/spec/containers/0/args/1
+  value: --cluster-name=cfcr
+
+
+- op: remove
+  path: /spec/template/spec/containers/0/env
+
+- op: add 
+  path: /spec/template/spec/containers/0/env
+  value:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: alb-ingress-iam
+          key: AWS_ACCESS_KEY_ID
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: alb-ingress-iam
+          key: AWS_SECRET_ACCESS_KEY

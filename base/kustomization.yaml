@@ -1,0 +1,4 @@
+resources:
+- ../aws-alb-ingress-controller/docs/examples/alb-ingress-controller.yaml
+- ../aws-alb-ingress-controller/docs/examples/rbac-role.yaml
+- secret-alb-ingress-iam.yaml

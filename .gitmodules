@@ -1,0 +1,3 @@
+[submodule "aws-alb-ingress-controller"]
+	path = aws-alb-ingress-controller
+	url = https://github.com/kubernetes-sigs/aws-alb-ingress-controller.git
