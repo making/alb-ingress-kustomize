@@ -2,22 +2,22 @@
   path: /spec/template/spec/containers/0/image
   value: amazon/aws-alb-ingress-controller:v1.0.1
 
-- op: replace
-  path: /spec/replicas
-  value: 2
+# - op: replace
+#   path: /spec/replicas
+#   value: 2
 
-- op: add
-  path: /spec/template/spec/affinity
-  value:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - alb-ingress-controller
-          topologyKey: kubernetes.io/hostname
+# - op: add
+#   path: /spec/template/spec/affinity
+#   value:
+#     podAntiAffinity:
+#       requiredDuringSchedulingIgnoredDuringExecution:
+#         - labelSelector:
+#             matchExpressions:
+#             - key: app
+#               operator: In
+#               values:
+#               - alb-ingress-controller
+#           topologyKey: kubernetes.io/hostname
 
 - op: replace
   path: /spec/template/spec/containers/0/args/1
